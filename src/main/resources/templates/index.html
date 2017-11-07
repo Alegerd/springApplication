@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+    <title>The Materialize Example</title>
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link href="css/materialize.min.css" rel="stylesheet"/>
+
+
+</head>
+
+<body class="white lighten-3">
+
+<header>
+    <nav class="teal top-nav" role="navigation">
+        <div class="nav-wrapper container teal">
+            <a id="logo-container" href="/" class="brand-logo">Realty Data Base<i
+                    class="material-icons left hide-on-med-and-down">apps</i></a>
+
+            <ul id="dropdown" class="dropdown-content">
+                <li><a href="">Register</a></li>
+                <li class="divider"></li>
+                <li><a href="">Sign In</a></li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down">
+                <li id="timer-tab"><a href="">Tab 1</a></li>
+                <li id="stats-tab"><a href="">Tab 2</a></li>
+                <li id="graphs-tab"><a href="">Tab 3</a></li>
+                <li><a href="" data-activates="dropdown" class="dropdown-button">Tab 4<i class="material-icons right">arrow_drop_down</i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</header>
+
+<main>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m4 l3">
+                <ul class="grey">
+
+                    <li class="col offset-l2"><p><a class="waves-effect waves-light btn">Branch</a></p></li>
+                    <li class="col offset-l2"><p><a class="waves-effect waves-light btn">Realty</a></p></li>
+                    <li class="col offset-l2"><p><a id="showCustomersBtn" class="waves-effect waves-light btn">Customer</a></p></li>
+                    <li class="col offset-l2"><p><a class="waves-effect waves-light btn">Realtor</a></p></li>
+                    <li class="col offset-l2"><p><a class="waves-effect waves-light btn">Seller</a></p></li>
+                    <li class="col offset-l2"><p><a class="waves-effect waves-light btn">Deal</a></p></li>
+                    <li class="col offset-l2"><p><a class="waves-effect waves-light btn">R F C</a></p></li>
+                </ul>
+            </div>
+
+
+            <div class="col s12 m8 l9 lighten-2">
+                <table class="striped">
+                    <thead id="myTableHead">
+                    </thead>
+
+                    <tbody id="myTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer class="page-footer teal">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
+                    content.</p>
+            </div>
+            <div class="col l2 offset-l2 s6">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Help</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Contact</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Suggestions</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2017 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
+</body>
+
+<script type="text/javascript"
+        src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $("#showCustomersBtn").click(function() {
+            $.ajax({
+                type: "GET",
+                contentType: 'application/json',
+                url: '/user/customers',
+                success: [ function (data) {
+
+                    if(data.length != 0) {
+                        var tr = $('<tr>');
+                        $('<th>').text('ID').appendTo(tr);
+                        $('<th>').text('Name').appendTo(tr);
+                        $('<th>').text('Budget').appendTo(tr);
+                        tr.appendTo('#myTableHead');
+                    }
+
+                    data.forEach(function (item) {
+                        var tr = $('<tr>');
+
+                        $.each(item, function (i, val) {
+                            $('<td>').text(val).appendTo(tr);
+                        })
+
+                        tr.appendTo('#myTableBody');
+                    })
+                }],
+                error: function(xhr, status, error) {
+                    alert(xhr.responseText + '|\n' + status + '|\n' +error);
+                }
+            });
+        });
+
+    });
+
+
+
+
+</script>
+</html>
