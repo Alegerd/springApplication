@@ -18,7 +18,7 @@
 <header>
     <nav class="teal top-nav" role="navigation">
         <div class="nav-wrapper container teal">
-            <a id="logo-container" href="/" class="brand-logo">Realty Data Base<i
+            <a id="logo-container" href="#" class="brand-logo">Realty Data Base<i
                     class="material-icons left hide-on-med-and-down">apps</i></a>
 
             <ul id="dropdown" class="dropdown-content">
@@ -46,7 +46,7 @@
             <div class="col s12 m4 l3">
                 <ul class="grey">
 
-                    <li class="col offset-l2"><p><a class="waves-effect waves-light btn">Branch</a></p></li>
+                    <li class="col offset-l2"><p><a id="showBranchesBtn" class="waves-effect waves-light btn">Branch</a></p></li>
                     <li class="col offset-l2"><p><a class="waves-effect waves-light btn">Realty</a></p></li>
                     <li class="col offset-l2"><p><a id="showCustomersBtn" class="waves-effect waves-light btn">Customer</a></p></li>
                     <li class="col offset-l2"><p><a class="waves-effect waves-light btn">Realtor</a></p></li>
@@ -111,12 +111,46 @@
                 contentType: 'application/json',
                 url: '/user/customers',
                 success: [ function (data) {
+                    $('#myTableHead').empty();
+                    $('#myTableBody').empty();
 
                     if(data.length != 0) {
                         var tr = $('<tr>');
                         $('<th>').text('ID').appendTo(tr);
                         $('<th>').text('Name').appendTo(tr);
                         $('<th>').text('Budget').appendTo(tr);
+                        tr.appendTo('#myTableHead');
+                    }
+
+                    data.forEach(function (item) {
+                        var tr = $('<tr>');
+
+                        $.each(item, function (i, val) {
+                            $('<td>').text(val).appendTo(tr);
+                        })
+
+                        tr.appendTo('#myTableBody');
+                    })
+                }],
+                error: function(xhr, status, error) {
+                    alert(xhr.responseText + '|\n' + status + '|\n' +error);
+                }
+            });
+        });
+
+        $("#showBranchesBtn").click(function() {
+            $.ajax({
+                type: "GET",
+                contentType: 'application/json',
+                url: '/user/branches',
+                success: [ function (data) {
+                    $('#myTableHead').empty();
+                    $('#myTableBody').empty();
+
+                    if(data.length != 0) {
+                        var tr = $('<tr>');
+                        $('<th>').text('ID').appendTo(tr);
+                        $('<th>').text('Address').appendTo(tr);
                         tr.appendTo('#myTableHead');
                     }
 

@@ -17,8 +17,8 @@ public class CustomerDAO implements ICustomerDAO{
 
     @Override
     public List<Customer> getAllCustomers() {
-        String queue = "FROM Customer";
-        return (List<Customer>)entityManager.createQuery(queue).getResultList();
+        String query = "FROM Customer";
+        return (List<Customer>)entityManager.createQuery(query).getResultList();
     }
 
     @Override
