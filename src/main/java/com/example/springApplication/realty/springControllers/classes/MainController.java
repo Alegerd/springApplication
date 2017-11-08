@@ -1,4 +1,4 @@
-package com.example.springApplication.realty.springControllers;
+package com.example.springApplication.realty.springControllers.classes;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

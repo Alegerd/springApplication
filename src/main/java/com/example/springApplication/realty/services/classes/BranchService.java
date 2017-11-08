@@ -1,7 +1,8 @@
-package com.example.springApplication.realty.services;
+package com.example.springApplication.realty.services.classes;
 
-import com.example.springApplication.realty.dao.BranchDAO;
-import com.example.springApplication.realty.entities.Branch;
+import com.example.springApplication.realty.dao.classes.BranchDAO;
+import com.example.springApplication.realty.entities.classes.Branch;
+import com.example.springApplication.realty.services.interfaces.IBranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +11,13 @@ import java.util.List;
 
 @Service("branchService")
 @Transactional
-public class BranchService implements IBranchService{
+public class BranchService implements IBranchService {
 
     @Autowired
     private BranchDAO branchDAO;
 
     @Override
-    public List<Branch> getAllBranches() {
+    public List<Branch.BranchStruct> getAllBranches() {
         return branchDAO.getAllBranches();
     }
 

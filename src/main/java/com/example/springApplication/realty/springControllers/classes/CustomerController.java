@@ -1,7 +1,7 @@
-package com.example.springApplication.realty.springControllers;
+package com.example.springApplication.realty.springControllers.classes;
 
-import com.example.springApplication.realty.entities.Customer;
-import com.example.springApplication.realty.services.ICustomerService;
+import com.example.springApplication.realty.entities.classes.Customer;
+import com.example.springApplication.realty.services.interfaces.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,9 +29,9 @@ public class CustomerController {
     }
 
     @GetMapping("customers")
-    public ResponseEntity<List<Customer>> getAllCustomers(){
-        List<Customer> customers = customerService.getAllCustomers();
-        return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
+    public ResponseEntity<List<Customer.CustomerStruct>> getAllCustomers(){
+        List<Customer.CustomerStruct> customers = customerService.getAllCustomers();
+        return new ResponseEntity<List<Customer.CustomerStruct>>(customers, HttpStatus.OK);
     }
 
     @PostMapping("customer")

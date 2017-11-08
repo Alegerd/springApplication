@@ -1,6 +1,6 @@
-package com.example.springApplication.realty.dao;
+package com.example.springApplication.realty.dao.interfaces;
 
-import com.example.springApplication.realty.entities.Seller;
+import com.example.springApplication.realty.entities.classes.Seller;
 
 import java.util.List;
 

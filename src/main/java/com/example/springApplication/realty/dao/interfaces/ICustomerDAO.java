@@ -1,10 +1,10 @@
-package com.example.springApplication.realty.dao;
-import com.example.springApplication.realty.entities.Customer;
+package com.example.springApplication.realty.dao.interfaces;
+import com.example.springApplication.realty.entities.classes.Customer;
 
 import java.util.List;
 
 public interface ICustomerDAO {
-    List<Customer> getAllCustomers();
+    List<Customer.CustomerStruct> getAllCustomers();
     Customer getCustomerByID(Integer id);
     void addCustomer(Customer customer);
     void updateCustomer(Customer customer);

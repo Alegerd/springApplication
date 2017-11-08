@@ -1,28 +1,23 @@
-package com.example.springApplication.realty.services;
+package com.example.springApplication.realty.services.classes;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import com.example.springApplication.realty.dao.ICustomerDAO;
-import org.apache.log4j.Logger;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import com.example.springApplication.realty.entities.Customer;
+import com.example.springApplication.realty.dao.interfaces.ICustomerDAO;
+import com.example.springApplication.realty.services.interfaces.ICustomerService;
+import com.example.springApplication.realty.entities.classes.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("customerService")
 @Transactional
-public class CustomerService implements ICustomerService{
+public class CustomerService implements ICustomerService {
 
     @Autowired
     private ICustomerDAO customerDAO;
 
     @Override
-    public List<Customer> getAllCustomers() {
+    public List<Customer.CustomerStruct> getAllCustomers() {
         return customerDAO.getAllCustomers();
     }
 

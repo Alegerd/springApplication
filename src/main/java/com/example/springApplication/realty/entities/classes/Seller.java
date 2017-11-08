@@ -1,4 +1,4 @@
-package com.example.springApplication.realty.entities;
+package com.example.springApplication.realty.entities.classes;
 
 import javax.persistence.*;
 import java.io.Serializable;

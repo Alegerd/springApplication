@@ -1,7 +1,7 @@
-package com.example.springApplication.realty.springControllers;
+package com.example.springApplication.realty.springControllers.classes;
 
-import com.example.springApplication.realty.entities.Branch;
-import com.example.springApplication.realty.services.BranchService;
+import com.example.springApplication.realty.entities.classes.Branch;
+import com.example.springApplication.realty.services.classes.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +19,8 @@ public class BranchController {
     private BranchService branchService;
 
     @GetMapping("branches")
-    public ResponseEntity<List<Branch>> getAllBranches(){
-        return new ResponseEntity<List<Branch>>(branchService.getAllBranches(), HttpStatus.OK);
+    public ResponseEntity<List<Branch.BranchStruct>> getAllBranches(){
+        return new ResponseEntity<List<Branch.BranchStruct>>(branchService.getAllBranches(), HttpStatus.OK);
     }
 
     // TODO: 07.11.2017 реализовать остальные методы контроллера

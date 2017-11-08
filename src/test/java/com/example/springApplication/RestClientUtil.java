@@ -1,6 +1,6 @@
 package com.example.springApplication;
 
-import com.example.springApplication.realty.entities.Customer;
+import com.example.springApplication.realty.entities.classes.Customer;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 

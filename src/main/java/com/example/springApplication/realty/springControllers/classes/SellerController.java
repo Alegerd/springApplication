@@ -1,7 +1,7 @@
-package com.example.springApplication.realty.springControllers;
+package com.example.springApplication.realty.springControllers.classes;
 
-import com.example.springApplication.realty.entities.Seller;
-import com.example.springApplication.realty.services.SellerService;
+import com.example.springApplication.realty.entities.classes.Seller;
+import com.example.springApplication.realty.services.classes.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

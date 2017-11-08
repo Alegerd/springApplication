@@ -1,24 +1,31 @@
-package com.example.springApplication.realty.dao;
+package com.example.springApplication.realty.dao.classes;
 
-import com.example.springApplication.realty.entities.Customer;
+import com.example.springApplication.realty.dao.interfaces.ICustomerDAO;
+import com.example.springApplication.realty.entities.classes.Customer;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
 @Repository
-public class CustomerDAO implements ICustomerDAO{
+public class CustomerDAO implements ICustomerDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public List<Customer> getAllCustomers() {
+    public List<Customer.CustomerStruct> getAllCustomers() {
         String query = "FROM Customer";
-        return (List<Customer>)entityManager.createQuery(query).getResultList();
+        List<Customer> customers =  (List<Customer>)entityManager.createQuery(query).getResultList();
+        List<Customer.CustomerStruct> cs = new ArrayList<>();
+        for (Customer customer: customers){
+            cs.add(customer.getCustomerInformation());
+        }
+        return cs;
     }
 
     @Override

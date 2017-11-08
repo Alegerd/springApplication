@@ -1,17 +1,19 @@
-package com.example.springApplication.realty.dao;
+package com.example.springApplication.realty.dao.classes;
 
-import com.example.springApplication.realty.entities.Branch;
+import com.example.springApplication.realty.dao.interfaces.IBranchDAO;
+import com.example.springApplication.realty.entities.classes.Branch;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
 @Repository
 public class BranchDAO implements IBranchDAO {
-
+    
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -21,9 +23,15 @@ public class BranchDAO implements IBranchDAO {
     }
 
     @Override
-    public List<Branch> getAllBranches() {
+    public List<Branch.BranchStruct> getAllBranches() {
         String query = "FROM Branch";
-        return (List<Branch>)entityManager.createQuery(query).getResultList();
+        List<Branch> branches =  (List<Branch>)entityManager.createQuery(query).getResultList();
+        List<Branch.BranchStruct> bs = new ArrayList<>();
+        for (Branch branch :
+                branches) {
+            bs.add(branch.getAllInformation());
+        }
+        return bs;
     }
 
     @Override

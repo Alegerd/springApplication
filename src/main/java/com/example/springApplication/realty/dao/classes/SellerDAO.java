@@ -1,6 +1,7 @@
-package com.example.springApplication.realty.dao;
+package com.example.springApplication.realty.dao.classes;
 
-import com.example.springApplication.realty.entities.Seller;
+import com.example.springApplication.realty.dao.interfaces.ISellerDAO;
+import com.example.springApplication.realty.entities.classes.Seller;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,14 +11,14 @@ import java.util.List;
 
 @Transactional
 @Repository
-public class SellerDAO implements ISellerDAO{
+public class SellerDAO implements ISellerDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     public List<Seller> getAllSellers() {
-        return entityManager.createQuery("FROM Seller").getResultList();
+        return (List<Seller>)entityManager.createQuery("FROM Seller").getResultList();
     }
 
     @Override
