@@ -2,6 +2,7 @@ package com.example.springApplication.realty.entities.classes;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "Realtor")
@@ -85,6 +86,18 @@ public class Realtor implements Serializable{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Branch", nullable = false)
     private Branch branch;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "realtor")
+    @ElementCollection(targetClass=Integer.class)
+    private Set<Deal> deals;
+
+    public Set<Deal> getDeals() {
+        return deals;
+    }
+
+    public void setDeals(Set<Deal> deals) {
+        this.deals = deals;
+    }
 
     public RealtorStruct getRealtorInformation(){
         return new RealtorStruct();

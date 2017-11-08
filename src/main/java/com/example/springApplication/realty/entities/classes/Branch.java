@@ -48,6 +48,19 @@ public class Branch implements Serializable{
     @ElementCollection(targetClass=Integer.class)
     private Set<Realtor> realtors;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
+    @ElementCollection(targetClass=Integer.class)
+    private Set<Realty> realties;
+
+    public Set<Realty> getRealties() {
+        return realties;
+    }
+
+    public void setRealties(Set<Realty> realties) {
+        this.realties = realties;
+    }
+
+
     public BranchStruct getAllInformation(){
         return new BranchStruct();
     }

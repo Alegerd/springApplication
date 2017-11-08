@@ -1,12 +1,9 @@
 package com.example.springApplication.realty.entities.classes;
 
 import java.io.Serializable;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Customer")
@@ -64,6 +61,10 @@ public class Customer implements Serializable {
 
     @Column(name = "Budget")
     private Integer budget;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    @ElementCollection(targetClass=Integer.class)
+    private Set<Deal> deals;
 
     public CustomerStruct getCustomerInformation(){
         return new CustomerStruct();

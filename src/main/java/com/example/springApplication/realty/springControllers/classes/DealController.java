@@ -1,7 +1,7 @@
 package com.example.springApplication.realty.springControllers.classes;
 
-import com.example.springApplication.realty.entities.classes.Seller;
-import com.example.springApplication.realty.services.classes.SellerService;
+import com.example.springApplication.realty.entities.classes.Deal;
+import com.example.springApplication.realty.services.classes.DealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +13,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("user")
-public class SellerController {
-
+public class DealController {
     @Autowired
-    private SellerService sellerService;
+    private DealService dealService;
 
-    @GetMapping("sellers")
-    public ResponseEntity<List<Seller.SellerStruct>> getAllSellers(){
-        return new ResponseEntity<>(sellerService.getAllSellers(), HttpStatus.OK);
+    @GetMapping("deals")
+    public ResponseEntity<List<Deal.DealStruct>> getAllDeals(){
+        return new ResponseEntity<List<Deal.DealStruct>>(dealService.getAllDeals(), HttpStatus.OK);
     }
-
 }

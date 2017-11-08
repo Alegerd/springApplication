@@ -4,6 +4,7 @@ import com.sun.org.apache.regexp.internal.RE;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "Realty")
@@ -102,6 +103,18 @@ public class Realty implements Serializable{
     @ManyToOne
     @JoinColumn(name = "Branch_ID", nullable = false)
     private Branch branch;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "realty")
+    @ElementCollection(targetClass=Integer.class)
+    private Set<Deal> deals;
+
+    public Set<Deal> getDeals() {
+        return deals;
+    }
+
+    public void setDeals(Set<Deal> deals) {
+        this.deals = deals;
+    }
 
     public RealtyStruct getAllInformation(){
         return new RealtyStruct();

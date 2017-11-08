@@ -17,7 +17,7 @@ public class SellerService implements ISellerSevice {
     private SellerDAO sellerDAO;
 
     @Override
-    public List<Seller> getAllSellers() {
+    public List<Seller.SellerStruct> getAllSellers() {
         return sellerDAO.getAllSellers();
     }
 
