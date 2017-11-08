@@ -47,7 +47,7 @@
                 <ul class="grey">
 
                     <li class="col offset-l2"><p><a id="showBranchesBtn" class="waves-effect waves-light btn">Branch</a></p></li>
-                    <li class="col offset-l2"><p><a class="waves-effect waves-light btn">Realty</a></p></li>
+                    <li class="col offset-l2"><p><a id="showRealtiesBtn" class="waves-effect waves-light btn">Realty</a></p></li>
                     <li class="col offset-l2"><p><a id="showCustomersBtn" class="waves-effect waves-light btn">Customer</a></p></li>
                     <li class="col offset-l2"><p><a id="showRealtorsBtn" class="waves-effect waves-light btn">Realtor</a></p></li>
                     <li class="col offset-l2"><p><a id="showSellersBtn" class="waves-effect waves-light btn">Seller</a></p></li>
@@ -217,6 +217,43 @@
                         $('<th>').text('Name').appendTo(tr);
                         $('<th>').text('Salary').appendTo(tr);
                         $('<th>').text('Rating').appendTo(tr);
+                        $('<th>').text('Branch').appendTo(tr);
+
+                        tr.appendTo('#myTableHead');
+                    }
+
+                    data.forEach(function (item) {
+                        var tr = $('<tr>');
+
+                        $.each(item, function (i, val) {
+                            $('<td>').text(val).appendTo(tr);
+                        })
+
+                        tr.appendTo('#myTableBody');
+                    })
+                }],
+                error: function(xhr, status, error) {
+                    alert(xhr.responseText + '|\n' + status + '|\n' +error);
+                }
+            });
+        });
+
+        $("#showRealtiesBtn").click(function() {
+            $.ajax({
+                type: "GET",
+                contentType: 'application/json',
+                url: '/user/realties',
+                success: [ function (data) {
+                    $('#myTableHead').empty();
+                    $('#myTableBody').empty();
+
+                    if(data.length != 0) {
+                        var tr = $('<tr>');
+                        $('<th>').text('ID').appendTo(tr);
+                        $('<th>').text('Type').appendTo(tr);
+                        $('<th>').text('Seller').appendTo(tr);
+                        $('<th>').text('Address').appendTo(tr);
+                        $('<th>').text('Price').appendTo(tr);
                         $('<th>').text('Branch').appendTo(tr);
 
                         tr.appendTo('#myTableHead');
