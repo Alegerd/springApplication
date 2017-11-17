@@ -16,6 +16,10 @@ public class BranchService implements IBranchService {
     @Autowired
     private BranchDAO branchDAO;
 
+    public List<String> getAllRealtors(Integer id){
+        return branchDAO.getAllRealtorsInBranch(id);
+    }
+
     @Override
     public List<Branch.BranchStruct> getAllBranches() {
         return branchDAO.getAllBranches();

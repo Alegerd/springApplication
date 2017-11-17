@@ -2,6 +2,7 @@ package com.example.springApplication.realty.dao.classes;
 
 import com.example.springApplication.realty.dao.interfaces.IBranchDAO;
 import com.example.springApplication.realty.entities.classes.Branch;
+import com.example.springApplication.realty.entities.classes.Realtor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -32,6 +33,12 @@ public class BranchDAO implements IBranchDAO {
             bs.add(branch.getAllInformation());
         }
         return bs;
+    }
+
+    public List<String> getAllRealtorsInBranch(Integer id) {
+        String query = "select name from Realtor R where R.branch = " + id;
+        List<String> result = (List<String>)entityManager.createQuery(query).getResultList();
+        return result;
     }
 
     @Override

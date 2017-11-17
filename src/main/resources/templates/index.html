@@ -57,7 +57,7 @@
             </div>
 
 
-            <div class="col s12 m8 l9 lighten-2">
+            <div class="col s12 m5 l6 lighten-2">
                 <table class="striped">
                     <thead id="myTableHead">
                     </thead>
@@ -66,6 +66,17 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="col m3 l3 lighten-2">
+                <table class="striped">
+                    <thead id="myResultTableHead">
+                    </thead>
+
+                    <tbody id="myResultTableBody">
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 
@@ -103,18 +114,20 @@
 <script src="js/materialize.min.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(function(){
+    $(document).ready(function() {
 
-        $("#showCustomersBtn").click(function() {
+        $("#showCustomersBtn").click(function () {
+            $('#myResultTableHead').empty();
+            $('#myResultTableBody').empty();
             $.ajax({
                 type: "GET",
                 contentType: 'application/json',
                 url: '/user/customers',
-                success: [ function (data) {
+                success: [function (data) {
                     $('#myTableHead').empty();
                     $('#myTableBody').empty();
 
-                    if(data.length != 0) {
+                    if (data.length != 0) {
                         var tr = $('<tr>');
                         $('<th>').text('ID').appendTo(tr);
                         $('<th>').text('Name').appendTo(tr);
@@ -132,22 +145,24 @@
                         tr.appendTo('#myTableBody');
                     })
                 }],
-                error: function(xhr, status, error) {
-                    alert(xhr.responseText + '|\n' + status + '|\n' +error);
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText + '|\n' + status + '|\n' + error);
                 }
             });
         });
 
-        $("#showSellersBtn").click(function() {
+        $("#showSellersBtn").click(function () {
+            $('#myResultTableHead').empty();
+            $('#myResultTableBody').empty();
             $.ajax({
                 type: "GET",
                 contentType: 'application/json',
                 url: '/user/sellers',
-                success: [ function (data) {
+                success: [function (data) {
                     $('#myTableHead').empty();
                     $('#myTableBody').empty();
 
-                    if(data.length != 0) {
+                    if (data.length != 0) {
                         var tr = $('<tr>');
                         $('<th>').text('ID').appendTo(tr);
                         $('<th>').text('Name').appendTo(tr);
@@ -164,54 +179,57 @@
                         tr.appendTo('#myTableBody');
                     })
                 }],
-                error: function(xhr, status, error) {
-                    alert(xhr.responseText + '|\n' + status + '|\n' +error);
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText + '|\n' + status + '|\n' + error);
                 }
             });
         });
 
-        $("#showBranchesBtn").click(function() {
+        $("#showBranchesBtn").click(function () {
+            $('#myResultTableHead').empty();
+            $('#myResultTableBody').empty();
             $.ajax({
                 type: "GET",
                 contentType: 'application/json',
                 url: '/user/branches',
-                success: [ function (data) {
+                success: [function (data) {
                     $('#myTableHead').empty();
                     $('#myTableBody').empty();
 
-                    if(data.length != 0) {
+                    if (data.length != 0) {
                         var tr = $('<tr>');
                         $('<th>').text('ID').appendTo(tr);
                         $('<th>').text('Address').appendTo(tr);
                         tr.appendTo('#myTableHead');
                     }
-
                     data.forEach(function (item) {
-                        var tr = $('<tr>');
+                        var tr = $('<tr onmouseenter=\'onMouseEnter(this)\'>');
 
                         $.each(item, function (i, val) {
-                            $('<td>').text(val).appendTo(tr);
+                            $("<td>").text(val).appendTo(tr);
                         })
 
                         tr.appendTo('#myTableBody');
                     })
                 }],
-                error: function(xhr, status, error) {
-                    alert(xhr.responseText + '|\n' + status + '|\n' +error);
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText + '|\n' + status + '|\n' + error);
                 }
             });
         });
 
-        $("#showRealtorsBtn").click(function() {
+        $("#showRealtorsBtn").click(function () {
+            $('#myResultTableHead').empty();
+            $('#myResultTableBody').empty();
             $.ajax({
                 type: "GET",
                 contentType: 'application/json',
                 url: '/user/realtors',
-                success: [ function (data) {
+                success: [function (data) {
                     $('#myTableHead').empty();
                     $('#myTableBody').empty();
 
-                    if(data.length != 0) {
+                    if (data.length != 0) {
                         var tr = $('<tr>');
                         $('<th>').text('ID').appendTo(tr);
                         $('<th>').text('Name').appendTo(tr);
@@ -232,22 +250,24 @@
                         tr.appendTo('#myTableBody');
                     })
                 }],
-                error: function(xhr, status, error) {
-                    alert(xhr.responseText + '|\n' + status + '|\n' +error);
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText + '|\n' + status + '|\n' + error);
                 }
             });
         });
 
-        $("#showRealtiesBtn").click(function() {
+        $("#showRealtiesBtn").click(function () {
+            $('#myResultTableHead').empty();
+            $('#myResultTableBody').empty();
             $.ajax({
                 type: "GET",
                 contentType: 'application/json',
                 url: '/user/realties',
-                success: [ function (data) {
+                success: [function (data) {
                     $('#myTableHead').empty();
                     $('#myTableBody').empty();
 
-                    if(data.length != 0) {
+                    if (data.length != 0) {
                         var tr = $('<tr>');
                         $('<th>').text('ID').appendTo(tr);
                         $('<th>').text('Type').appendTo(tr);
@@ -269,22 +289,24 @@
                         tr.appendTo('#myTableBody');
                     })
                 }],
-                error: function(xhr, status, error) {
-                    alert(xhr.responseText + '|\n' + status + '|\n' +error);
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText + '|\n' + status + '|\n' + error);
                 }
             });
         });
 
-        $("#showDealsBtn").click(function() {
+        $("#showDealsBtn").click(function () {
+            $('#myResultTableHead').empty();
+            $('#myResultTableBody').empty();
             $.ajax({
                 type: "GET",
                 contentType: 'application/json',
                 url: '/user/deals',
-                success: [ function (data) {
+                success: [function (data) {
                     $('#myTableHead').empty();
                     $('#myTableBody').empty();
 
-                    if(data.length != 0) {
+                    if (data.length != 0) {
                         var tr = $('<tr>');
                         $('<th>').text('ID').appendTo(tr);
                         $('<th>').text('Realtor').appendTo(tr);
@@ -305,16 +327,41 @@
                         tr.appendTo('#myTableBody');
                     })
                 }],
-                error: function(xhr, status, error) {
-                    alert(xhr.responseText + '|\n' + status + '|\n' +error);
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText + '|\n' + status + '|\n' + error);
                 }
             });
         });
-
     });
 
+    function onMouseEnter(row) {
+        $('#myResultTableHead').empty();
+        $('#myResultTableBody').empty();
 
+        $.ajax({
+            type: "GET",
+            contentType: 'application/json',
+            url: '/user/realtorsInBranch/' + row.firstChild.textContent,
+            success: [function (data) {
 
+                if (data.length != 0) {
+                    var tr = $('<tr>');
+                    $('<th>').text('Realtors in this Branch').appendTo(tr);
+                    tr.appendTo('#myResultTableHead');
+                }
+                data.forEach(function (item) {
+                    var tr = $('<tr>');
+
+                    $("<td>").text(item).appendTo(tr);
+
+                    tr.appendTo('#myResultTableBody');
+                })
+            }],
+            error: function (xhr, status, error) {
+                alert(xhr.responseText + '|\n' + status + '|\n' + error);
+            }
+        });
+    }
 
 </script>
 </html>
