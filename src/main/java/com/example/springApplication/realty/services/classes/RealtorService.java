@@ -20,4 +20,8 @@ public class RealtorService implements IRealtorService {
     public List<Realtor.RealtorStruct> getAllRealtors() {
         return realtorDAO.getAllRealtors();
     }
+
+    public String getRealtorsPhoto(Integer id){
+        return realtorDAO.getRealtorsPhoto(id);
+    }
 }

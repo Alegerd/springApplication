@@ -1,5 +1,6 @@
 package com.example.springApplication.realty.springControllers.classes;
 
+import com.example.springApplication.realty.entities.classes.Realtor;
 import com.example.springApplication.realty.services.classes.BranchService;
 import com.example.springApplication.realty.services.classes.RealtyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class BranchesLinkController {
     private RealtyService realtyService;
 
     @GetMapping("realtorsInBranch/{id}")
-    public ResponseEntity<List<String>> getAllRealtorsInBranch(@PathVariable Integer id){
-        return new ResponseEntity<List<String>>(branchService.getAllRealtors(id), HttpStatus.OK);
+    public ResponseEntity<List<Realtor.RealtorAndID>> getAllRealtorsInBranch(@PathVariable Integer id){
+        return new ResponseEntity<List<Realtor.RealtorAndID>>(branchService.getAllRealtors(id), HttpStatus.OK);
     }
 }

@@ -10,7 +10,11 @@
 
     <link href="css/materialize.min.css" rel="stylesheet"/>
 
-
+    <style>
+        #floatTip{
+            position: absolute; display: none;
+        }
+    </style>
 </head>
 
 <body class="white lighten-3">
@@ -40,6 +44,22 @@
 </header>
 
 <main>
+
+    <div id="floatTip" class="row">
+        <div class="col s12 m7">
+            <div class="card">
+                <div class="card-image">
+                    <img id="imgPlace" src="">
+                    <span class="card-title">
+                        <p class="messageBox"></p>
+                    </span>
+                </div>
+                <div class="card-content">
+                    <p>Realtor</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -112,6 +132,42 @@
 <script type="text/javascript"
         src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.min.js"></script>
+<script type="text/javascript">
+    document.onmousemove = moveTip;
+    function moveTip(e) {
+        floatTipStyle = document.getElementById("floatTip").style;
+        w = 250; // Ширина слоя
+        // Для браузера IE
+        if (document.all) {
+            x = event.x + document.body.scrollLeft;
+            y = event.y + document.body.scrollTop;
+            // Для остальных браузеров
+        } else {
+            x = e.pageX; // Координата X курсора
+            y = e.pageY; // Координата Y курсора
+        }
+        // Показывать слой справа от курсора
+        if ((x + w + 10) < document.body.clientWidth) {
+            floatTipStyle.left = x + 'px';
+            // Показывать слой слева от курсора
+        } else {
+            floatTipStyle.left = x - w + 'px';
+        }
+        // Положение от верхнего края окна браузера
+        floatTipStyle.top = y + 20 + 'px';
+    }
+    function toolTip(image, msg) {
+        floatTipStyle = document.getElementById("floatTip").style;
+        if (msg) {
+            // Выводим текст подсказки
+            $("#floatTip").find("#imgPlace").attr("src", image);
+            $("#floatTip").find(".messageBox").text(msg);
+            floatTipStyle.display = "block"; // Показываем слой
+        } else {
+            floatTipStyle.display = "none"; // Прячем слой
+        }
+    }
+</script>
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -346,13 +402,16 @@
 
                 if (data.length != 0) {
                     var tr = $('<tr>');
-                    $('<th>').text('Realtors in this Branch').appendTo(tr);
+                    $('<th>').text('ID').appendTo(tr);
+                    $('<th>').text('Realtor\'s name').appendTo(tr);
                     tr.appendTo('#myResultTableHead');
                 }
                 data.forEach(function (item) {
-                    var tr = $('<tr>');
+                    var tr = $('<tr onmouseover=\'findRealtorsPhotoById(this.firstChild.textContent, this.lastChild.textContent)\' onmouseleave=\'toolTip()\'>');
 
-                    $("<td>").text(item).appendTo(tr);
+                    $.each(item, function (i, val) {
+                        $("<td>").text(val).appendTo(tr);
+                    })
 
                     tr.appendTo('#myResultTableBody');
                 })
@@ -361,6 +420,23 @@
                 alert(xhr.responseText + '|\n' + status + '|\n' + error);
             }
         });
+    }
+
+    function findRealtorsPhotoById(id, name) {
+        $('#imgPlace').empty();
+        $('.messageBox').empty();
+        if(id != null){
+            $.ajax({
+                type: "GET",
+                contentType: 'application/json',
+                url: '/user/realtorPhoto/' + id,
+                success: [function(data){
+                    if(data.length != 0){
+                        toolTip(data, name);
+                    }
+                }]
+            })
+        }
     }
 
 </script>

@@ -27,4 +27,9 @@ public class RealtorDAO implements IRealtorDAO {
         }
         return rs;
     }
+
+    public String getRealtorsPhoto(Integer id){
+        List<String> photo = (List<String>)entityManager.createQuery("select photo from Realtor R where R.id = " + id).getResultList();
+        return photo.get(0);
+    }
 }

@@ -35,10 +35,14 @@ public class BranchDAO implements IBranchDAO {
         return bs;
     }
 
-    public List<String> getAllRealtorsInBranch(Integer id) {
-        String query = "select name from Realtor R where R.branch = " + id;
-        List<String> result = (List<String>)entityManager.createQuery(query).getResultList();
-        return result;
+    public List<Realtor.RealtorAndID> getAllRealtorsInBranch(Integer id) {
+        String query = "from Realtor R where R.branch = " + id;
+        List<Realtor> result = (List<Realtor>)entityManager.createQuery(query).getResultList();
+        List<Realtor.RealtorAndID> realtors = new ArrayList<>();
+        for (Realtor r: result) {
+            realtors.add(r.getRealtorAndID());
+        }
+        return realtors;
     }
 
     @Override

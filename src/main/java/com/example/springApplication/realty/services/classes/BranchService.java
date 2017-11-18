@@ -2,6 +2,7 @@ package com.example.springApplication.realty.services.classes;
 
 import com.example.springApplication.realty.dao.classes.BranchDAO;
 import com.example.springApplication.realty.entities.classes.Branch;
+import com.example.springApplication.realty.entities.classes.Realtor;
 import com.example.springApplication.realty.services.interfaces.IBranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class BranchService implements IBranchService {
     @Autowired
     private BranchDAO branchDAO;
 
-    public List<String> getAllRealtors(Integer id){
+    public List<Realtor.RealtorAndID> getAllRealtors(Integer id){
         return branchDAO.getAllRealtorsInBranch(id);
     }
 

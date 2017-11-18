@@ -69,6 +69,33 @@ public class Realtor implements Serializable{
         }
     }
 
+    public class RealtorAndID implements Serializable{
+        private Integer id;
+        private String name;
+
+        public RealtorAndID() {
+            this.id = Realtor.this.id;
+            this.name = Realtor.this.name;
+        }
+
+        public Integer getId() {
+
+            return id;
+        }
+
+        public void setID(Integer id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "Realtor_ID")
@@ -82,6 +109,9 @@ public class Realtor implements Serializable{
 
     @Column(name = "Rating")
     private Integer rating;
+
+    @Column(name = "Photo")
+    private String photo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Branch", nullable = false)
@@ -98,6 +128,8 @@ public class Realtor implements Serializable{
     public void setDeals(Set<Deal> deals) {
         this.deals = deals;
     }
+
+    public RealtorAndID getRealtorAndID(){ return new RealtorAndID(); }
 
     public RealtorStruct getRealtorInformation(){
         return new RealtorStruct();
@@ -122,6 +154,15 @@ public class Realtor implements Serializable{
     public void setRating(Integer rating) {
         this.rating = rating;
     }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
 
     public void setId(Integer id) {
 
